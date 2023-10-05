@@ -43,6 +43,20 @@ class Scraper:
                     break
             filtered.append(x)
         return filtered
+    def filter_7778(self):
+        if len(self.ips) == 0:
+            return 0
+        filtered = []
+        for i, ip in enumerate(self.ips):
+            x = ''
+            for l in ip:
+                if l != ':':
+                    x += l
+                else:
+                    x += ':7778'
+                    break
+            filtered.append(x)
+        return filtered     
     def filter_raw(self):
         if len(self.ips) == 0:
             return 0
@@ -67,5 +81,8 @@ class FileManager:
             os.remove(self.path)
             open(self.path, 'x')
     def dump(self, data):
-        with open(self.path, 'w') as target:
-            target.write(str(data))
+        with open(self.path, 'wb') as target:
+            pickle.dump(data, target)
+    def read(self):
+        with open(self.path, 'rb') as target:
+            return pickle.loads(target)
