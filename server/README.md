@@ -7,4 +7,10 @@ Chromium driver to scrape IPs from cspr.live
 python3 main.py
 ```
 
-=> read console output
+Mainnet peers:
+
+=> http://127.0.0.1:8000
+
+Testnet peers:
+
+=> http://127.0.0.1:8000/test
