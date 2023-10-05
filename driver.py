@@ -1,5 +1,6 @@
 from playwright.sync_api import sync_playwright
 from lxml import html
+import pickle, os
 
 IP_SELECTOR="xpath=/html/body/div[1]/div[2]/div[2]/div/div[2]/table/tbody/tr[{}]/td[2]"
 BUTTON_SELECTOR="xpath=/html/body/div[1]/div[2]/div[2]/div/div[3]/div/div[2]/button[3]"
@@ -55,3 +56,16 @@ class Scraper:
                     break
             filtered.append(x)
         return filtered
+
+class FileManager:
+    def __init__(self, path):
+        self.path = path
+    def new(self):
+        if not os.path.exists(self.path):
+            open(self.path, 'x')
+        else:
+            os.remove(self.path)
+            open(self.path, 'x')
+    def dump(self, data):
+        with open(self.path, 'w') as target:
+            target.write(str(data))
